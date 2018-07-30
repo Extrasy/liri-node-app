@@ -30,7 +30,7 @@ var spot = (name) => {
 var meTweets = () => {
     var client = new Twitter(twitterKeys);
 
-    var params = { screen_name: 'nodejs' };
+    var params = { screen_name: '3X7R45Y' };
     client.get('statuses/user_timeline', params, function (error, json) {
         if (!error) {
             var tweets = json;
@@ -56,14 +56,21 @@ var movieTime = (movie) => {
         } else {
             let jsonData = JSON.parse(body);
 
-            console.log("'" + movie + "'");
-            console.log(jsonData.Year);
-            console.log(jsonData.imdbRating);
-            console.log(jsonData.Ratings[1].Value);
-            console.log(jsonData.Language);
-            console.log(jsonData.Actors);
-            console.log(jsonData.Plot);
+            output = 
+            "'" + movie + "'" +"\n" +
+            jsonData.Year +"\n" +
+            jsonData.imdbRating +"\n"+
+            jsonData.Ratings[1].Value +"\n" +
+            jsonData.Language +"\n" +
+            jsonData.Actors +"\n" +
+            jsonData.Plot +"\n";
 
+            console.log(output);
+
+            fs.appendFile("log.txt", output, function(err) {
+                if (err) throw err;
+                console.log('Saved!');
+            });
 
             /* * Title of the movie.
             * Year the movie came out.
